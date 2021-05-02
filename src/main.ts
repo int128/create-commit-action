@@ -1,13 +1,19 @@
 import * as core from '@actions/core'
-import { getMessage } from './message'
+import { run } from './run'
 
-async function run(): Promise<void> {
+async function main(): Promise<void> {
   try {
-    const name = core.getInput('name', { required: true })
-    core.info(getMessage(name))
+    await run({
+      repository: core.getInput('repository', { required: true }),
+      ref: core.getInput('ref', { required: true }),
+      path: core.getInput('path', { required: true }),
+      baseDirectory: core.getInput('base-directory', { required: true }),
+      message: core.getInput('message', { required: true }),
+      token: core.getInput('token', { required: true }),
+    })
   } catch (error) {
     core.setFailed(error.message)
   }
 }
 
-run()
+main()

@@ -1,9 +1,26 @@
-name: hello-world
-description: say Hello World
+name: create-commit
+description: create a commit using GitHub API
 inputs:
-  name:
-    description: example input
+  repository:
+    description: repository name to push (i.e. REPO/NAME)
     required: true
+  ref:
+    description: ref name to update (e.g. refs/heads/main)
+    required: true
+  path:
+    description: glob paths to commit
+    required: true
+  base-directory:
+    description: base directory to compute a path of file to commit
+    required: true
+    default: ${{ github.workspace }}
+  message:
+    description: commit message
+    required: true
+  token:
+    description: GitHub token
+    required: true
+    default: ${{ github.token }}
 runs:
   using: 'node12'
   main: 'dist/index.js'

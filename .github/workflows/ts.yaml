@@ -52,3 +52,17 @@ jobs:
       - run: yarn build
       - run: yarn package
       - uses: int128/update-generated-files-action@main
+
+  e2e-test:
+    needs: [generate]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: ./
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.head_ref }}
+          path: LICENSE
+          message: e2e-test
