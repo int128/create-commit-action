@@ -11,10 +11,13 @@
     "lint": "eslint src/**/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
+    "generate": "yarn build && yarn package",
     "all": "yarn build && yarn format && yarn lint && yarn package && yarn test"
   },
   "dependencies": {
-    "@actions/core": "1.2.7"
+    "@actions/core": "1.2.7",
+    "@actions/github": "^4.0.0",
+    "@actions/glob": "^0.1.1"
   },
   "devDependencies": {
     "@types/jest": "26.0.23",
