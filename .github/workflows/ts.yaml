@@ -54,6 +54,7 @@ jobs:
       - uses: int128/update-generated-files-action@main
 
   e2e-test:
+    if: github.event_name == 'pull_request'
     needs: [generate]
     runs-on: ubuntu-latest
     steps:
