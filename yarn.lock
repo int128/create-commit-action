@@ -760,7 +760,7 @@
     "@graphql-tools/utils" "^6"
     tslib "~2.0.1"
 
-"@graphql-codegen/import-types-preset@^1.18.1":
+"@graphql-codegen/import-types-preset@1.18.1":
   version "1.18.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/import-types-preset/-/import-types-preset-1.18.1.tgz#86d7c41243e1a5fca9ecfff5c0fa5e3f9d0ab3aa"
   integrity sha512-kEu47bv/q/hn8JdaLu8dj34CM7zwCePq7OcnsIGtMtIA0SMZ5TvpO3VkDuYUQd0lh/dckVwIfasZv/3U8Tw2pQ==
@@ -781,7 +781,7 @@
     lodash "~4.17.0"
     tslib "~2.2.0"
 
-"@graphql-codegen/typescript-operations@^1.17.16":
+"@graphql-codegen/typescript-operations@1.17.16":
   version "1.17.16"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-1.17.16.tgz#75eb389f268b2dbd2e46b235bcb957be561c31cb"
   integrity sha512-DoWIhg/c2XS4IpgRLRXRBJDwmKoIl6KuzL2iO9GElX0rdjYguwbqx6iDV1pgktTTajMy8pXP56oZhmEcZLRD2Q==
@@ -1291,7 +1291,7 @@
     is-plain-object "^5.0.0"
     universal-user-agent "^6.0.0"
 
-"@octokit/graphql-schema@^10.39.1":
+"@octokit/graphql-schema@10.39.1":
   version "10.39.1"
   resolved "https://registry.yarnpkg.com/@octokit/graphql-schema/-/graphql-schema-10.39.1.tgz#06d6c2fd102b531f5c7263a12fdac911713b8c6a"
   integrity sha512-ZTHQCVycFaGKtOw94RTWjCKSLY3lMk+GRTuFotmmCk8WABBF3XQtH1wdxIcpH3cvluWop8YEtrtb1OggSQ6F4A==
@@ -3619,7 +3619,7 @@ graphql-ws@^4.4.1:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-4.5.0.tgz#c71c6eed34850c375156c29b1ed45cea2f9aee6b"
   integrity sha512-J3PuSfOKX2y9ryOtWxOcKlizkFWyhCvPAc3hhMKMVSTcPxtWiv9oNzvAZp1HKfuQng32YQduHeX+lRDy2+F6VQ==
 
-graphql@^15.0.0, graphql@^15.5.0:
+graphql@15.5.0, graphql@^15.0.0:
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.5.0.tgz#39d19494dbe69d1ea719915b578bf920344a69d5"
   integrity sha512-OmaM7y0kaK31NKG31q4YbD2beNYa6jBBKtMFT6gLYJljHLJr42IqJ8KX08u3Li/0ifzTU5HjmoOOrwa5BRLeDA==
