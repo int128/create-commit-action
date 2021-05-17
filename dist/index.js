@@ -1,6 +1,49 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 5816:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.queryBaseGitObject = void 0;
+const query = /* GraphQL */ `
+  query baseGitObject($owner: String!, $repo: String!, $ref: String!) {
+    repository(owner: $owner, name: $repo) {
+      ref(qualifiedName: $ref) {
+        prefix
+        name
+        target {
+          __typename
+          ... on Commit {
+            oid
+            tree {
+              oid
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const queryBaseGitObject = (octokit, v) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield octokit.graphql(query, v);
+});
+exports.queryBaseGitObject = queryBaseGitObject;
+
+
+/***/ }),
+
 /***/ 9536:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -99,28 +142,16 @@ const glob = __importStar(__nccwpck_require__(8090));
 const github = __importStar(__nccwpck_require__(5438));
 const fs_1 = __nccwpck_require__(5747);
 const path = __importStar(__nccwpck_require__(5622));
+const base_git_object_1 = __nccwpck_require__(5816);
 const run = (inputs) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e, _f;
     const [owner, repo] = inputs.repository.split('/');
     const octokit = github.getOctokit(inputs.token);
-    const baseGitObject = yield octokit.graphql(`
-    query baseGitObject($owner: String!, $repo: String!, $ref: String!) {
-      repository(owner: $owner, name: $repo) {
-        ref(qualifiedName: $ref) {
-          prefix
-          name
-          target {
-            ... on Commit {
-              oid
-              tree {
-                oid
-              }
-            }
-          }
-        }
-      }
-    }
-    `, { owner, repo, ref: inputs.ref });
+    const baseGitObject = yield base_git_object_1.queryBaseGitObject(octokit, { owner, repo, ref: inputs.ref });
     core.info(`found base ${JSON.stringify(baseGitObject, undefined, 2)}`);
+    if (((_c = (_b = (_a = baseGitObject === null || baseGitObject === void 0 ? void 0 : baseGitObject.repository) === null || _a === void 0 ? void 0 : _a.ref) === null || _b === void 0 ? void 0 : _b.target) === null || _c === void 0 ? void 0 : _c.__typename) !== 'Commit') {
+        throw new Error(`unexpected query response: typename == ${(_f = (_e = (_d = baseGitObject === null || baseGitObject === void 0 ? void 0 : baseGitObject.repository) === null || _d === void 0 ? void 0 : _d.ref) === null || _e === void 0 ? void 0 : _e.target) === null || _f === void 0 ? void 0 : _f.__typename}`);
+    }
     const treeFiles = yield globTreeFiles(inputs.baseDirectory, inputs.path);
     const treeEntries = yield Promise.all(treeFiles.map((f) => __awaiter(void 0, void 0, void 0, function* () {
         const { data: blob } = yield octokit.git.createBlob({

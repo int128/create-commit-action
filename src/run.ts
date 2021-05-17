@@ -3,6 +3,7 @@ import * as glob from '@actions/glob'
 import * as github from '@actions/github'
 import { promises as fs } from 'fs'
 import * as path from 'path'
+import { queryBaseGitObject } from './base-git-object'
 
 interface Inputs {
   repository: string
@@ -17,36 +18,11 @@ export const run = async (inputs: Inputs): Promise<void> => {
   const [owner, repo] = inputs.repository.split('/')
   const octokit = github.getOctokit(inputs.token)
 
-  const baseGitObject: {
-    repository: {
-      ref: {
-        prefix: string
-        name: string
-        target: { oid: string; tree: { oid: string } }
-      }
-    }
-  } = await octokit.graphql(
-    `
-    query baseGitObject($owner: String!, $repo: String!, $ref: String!) {
-      repository(owner: $owner, name: $repo) {
-        ref(qualifiedName: $ref) {
-          prefix
-          name
-          target {
-            ... on Commit {
-              oid
-              tree {
-                oid
-              }
-            }
-          }
-        }
-      }
-    }
-    `,
-    { owner, repo, ref: inputs.ref }
-  )
+  const baseGitObject = await queryBaseGitObject(octokit, { owner, repo, ref: inputs.ref })
   core.info(`found base ${JSON.stringify(baseGitObject, undefined, 2)}`)
+  if (baseGitObject?.repository?.ref?.target?.__typename !== 'Commit') {
+    throw new Error(`unexpected query response: typename == ${baseGitObject?.repository?.ref?.target?.__typename}`)
+  }
 
   const treeFiles = await globTreeFiles(inputs.baseDirectory, inputs.path)
   const treeEntries = await Promise.all(
