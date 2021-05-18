@@ -154,7 +154,7 @@ const run = (inputs) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const treeFiles = yield globTreeFiles(inputs.baseDirectory, inputs.path);
     const treeEntries = yield Promise.all(treeFiles.map((f) => __awaiter(void 0, void 0, void 0, function* () {
-        const { data: blob } = yield octokit.git.createBlob({
+        const { data: blob } = yield octokit.rest.git.createBlob({
             owner,
             repo,
             encoding: 'base64',
@@ -168,14 +168,14 @@ const run = (inputs) => __awaiter(void 0, void 0, void 0, function* () {
             mode: f.mode,
         };
     })));
-    const { data: tree } = yield octokit.git.createTree({
+    const { data: tree } = yield octokit.rest.git.createTree({
         owner,
         repo,
         tree: treeEntries,
         base_tree: baseGitObject.repository.ref.target.tree.oid,
     });
     core.info(`created tree ${tree.sha}`);
-    const { data: commit } = yield octokit.git.createCommit({
+    const { data: commit } = yield octokit.rest.git.createCommit({
         owner,
         repo,
         tree: tree.sha,
@@ -183,7 +183,7 @@ const run = (inputs) => __awaiter(void 0, void 0, void 0, function* () {
         message: inputs.message,
     });
     core.info(`created commit ${commit.sha}`);
-    const { data: commitDetail } = yield octokit.repos.getCommit({
+    const { data: commitDetail } = yield octokit.rest.repos.getCommit({
         owner,
         repo,
         ref: commit.sha,
@@ -198,7 +198,7 @@ const run = (inputs) => __awaiter(void 0, void 0, void 0, function* () {
     for (const f of commitDetail.files) {
         core.info(`commit: ${f.status} ${f.filename} (+${f.additions} -${f.deletions})`);
     }
-    const { data: updatedRef } = yield octokit.git.updateRef({
+    const { data: updatedRef } = yield octokit.rest.git.updateRef({
         owner,
         repo,
         ref: `heads/${baseGitObject.repository.ref.name}`,
@@ -639,6 +639,7 @@ class Context {
      * Hydrate the context from the environment
      */
     constructor() {
+        var _a, _b, _c;
         this.payload = {};
         if (process.env.GITHUB_EVENT_PATH) {
             if (fs_1.existsSync(process.env.GITHUB_EVENT_PATH)) {
@@ -658,6 +659,9 @@ class Context {
         this.job = process.env.GITHUB_JOB;
         this.runNumber = parseInt(process.env.GITHUB_RUN_NUMBER, 10);
         this.runId = parseInt(process.env.GITHUB_RUN_ID, 10);
+        this.apiUrl = (_a = process.env.GITHUB_API_URL) !== null && _a !== void 0 ? _a : `https://api.github.com`;
+        this.serverUrl = (_b = process.env.GITHUB_SERVER_URL) !== null && _b !== void 0 ? _b : `https://github.com`;
+        this.graphqlUrl = (_c = process.env.GITHUB_GRAPHQL_URL) !== null && _c !== void 0 ? _c : `https://api.github.com/graphql`;
     }
     get issue() {
         const payload = this.payload;
@@ -702,7 +706,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -745,7 +749,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -795,7 +799,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -4319,6 +4323,7 @@ const Endpoints = {
     getLatestRelease: ["GET /repos/{owner}/{repo}/releases/latest"],
     getPages: ["GET /repos/{owner}/{repo}/pages"],
     getPagesBuild: ["GET /repos/{owner}/{repo}/pages/builds/{build_id}"],
+    getPagesHealthCheck: ["GET /repos/{owner}/{repo}/pages/health"],
     getParticipationStats: ["GET /repos/{owner}/{repo}/stats/participation"],
     getPullRequestReviewProtection: ["GET /repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews"],
     getPunchCardStats: ["GET /repos/{owner}/{repo}/stats/punch_card"],
@@ -4527,7 +4532,7 @@ const Endpoints = {
   }
 };
 
-const VERSION = "4.15.1";
+const VERSION = "5.1.1";
 
 function endpointsToMethods(octokit, endpointsMap) {
   const newMethods = {};
@@ -4612,12 +4617,20 @@ function decorate(octokit, scope, methodName, defaults, decorations) {
 
 function restEndpointMethods(octokit) {
   const api = endpointsToMethods(octokit, Endpoints);
+  return {
+    rest: api
+  };
+}
+restEndpointMethods.VERSION = VERSION;
+function legacyRestEndpointMethods(octokit) {
+  const api = endpointsToMethods(octokit, Endpoints);
   return _objectSpread2(_objectSpread2({}, api), {}, {
     rest: api
   });
 }
-restEndpointMethods.VERSION = VERSION;
+legacyRestEndpointMethods.VERSION = VERSION;
 
+exports.legacyRestEndpointMethods = legacyRestEndpointMethods;
 exports.restEndpointMethods = restEndpointMethods;
 //# sourceMappingURL=index.js.map
 
