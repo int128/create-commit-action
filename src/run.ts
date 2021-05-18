@@ -27,7 +27,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
   const treeFiles = await globTreeFiles(inputs.baseDirectory, inputs.path)
   const treeEntries = await Promise.all(
     treeFiles.map(async (f) => {
-      const { data: blob } = await octokit.git.createBlob({
+      const { data: blob } = await octokit.rest.git.createBlob({
         owner,
         repo,
         encoding: 'base64',
@@ -43,7 +43,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
     })
   )
 
-  const { data: tree } = await octokit.git.createTree({
+  const { data: tree } = await octokit.rest.git.createTree({
     owner,
     repo,
     tree: treeEntries,
@@ -51,7 +51,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
   })
   core.info(`created tree ${tree.sha}`)
 
-  const { data: commit } = await octokit.git.createCommit({
+  const { data: commit } = await octokit.rest.git.createCommit({
     owner,
     repo,
     tree: tree.sha,
@@ -60,7 +60,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
   })
   core.info(`created commit ${commit.sha}`)
 
-  const { data: commitDetail } = await octokit.repos.getCommit({
+  const { data: commitDetail } = await octokit.rest.repos.getCommit({
     owner,
     repo,
     ref: commit.sha,
@@ -76,7 +76,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
     core.info(`commit: ${f.status} ${f.filename} (+${f.additions} -${f.deletions})`)
   }
 
-  const { data: updatedRef } = await octokit.git.updateRef({
+  const { data: updatedRef } = await octokit.rest.git.updateRef({
     owner,
     repo,
     ref: `heads/${baseGitObject.repository.ref.name}`,
