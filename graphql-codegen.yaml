@@ -11,4 +11,4 @@ generates:
       - typescript-operations
     preset: import-types
     presetConfig:
-      typesPath: ./types
+      typesPath: ./graphql-types
