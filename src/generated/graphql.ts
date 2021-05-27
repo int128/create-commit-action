@@ -1,4 +1,4 @@
-import * as Types from './types';
+import * as Types from './graphql-types';
 
 export type BaseGitObjectQueryVariables = Types.Exact<{
   owner: Types.Scalars['String'];
