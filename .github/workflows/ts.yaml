@@ -1,4 +1,4 @@
-name: test
+name: ts
 
 on:
   push:
@@ -17,12 +17,10 @@ on:
       - .github/workflows/test.yaml
 
 jobs:
-  ts:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
       - id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - uses: actions/cache@v2
@@ -36,13 +34,28 @@ jobs:
       - run: yarn test
       - run: yarn generate
 
+      # TODO: push to an ephemeral branch
       - name: e2e-test
+        if: github.event_name == 'pull_request'
         uses: ./
         with:
           repository: ${{ github.repository }}
           ref: ${{ github.head_ref }}
           path: LICENSE
           message: e2e-test
-        if: github.event_name == 'pull_request'
 
-      - uses: int128/update-generated-files-action@main
+      - name: release
+        if: github.event_name == 'push'
+        env:
+          LATEST_TAG: v1
+        run: |
+          set -eux
+          git branch "release/$LATEST_TAG"
+          test -f dist/index.js
+          git add .
+          git status
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Release $LATEST_TAG"
+          git tag -f "$LATEST_TAG"
+          git push origin -f "$LATEST_TAG" "release/$LATEST_TAG"
