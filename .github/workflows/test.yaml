@@ -44,5 +44,3 @@ jobs:
           path: LICENSE
           message: e2e-test
         if: github.event_name == 'pull_request'
-
-      - uses: int128/update-generated-files-action@main
