@@ -31,8 +31,10 @@ jobs:
             ${{ runner.os }}-yarn-
       - run: yarn
       - run: yarn lint
+      - run: yarn format-check
       - run: yarn test
-      - run: yarn generate
+      - run: yarn build
+      - run: yarn package
 
       # TODO: push to an ephemeral branch
       - name: e2e-test
