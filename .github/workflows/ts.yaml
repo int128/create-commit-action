@@ -7,14 +7,14 @@ on:
       - src/**
       - test/**
       - '*.json'
-      - .github/workflows/test.yaml
+      - .github/workflows/ts.yaml
   pull_request:
     branches: [main]
     paths:
       - src/**
       - test/**
       - '*.json'
-      - .github/workflows/test.yaml
+      - .github/workflows/ts.yaml
 
 jobs:
   build:
