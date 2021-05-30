@@ -7,14 +7,14 @@ on:
       - src/**
       - test/**
       - '*.json'
-      - .github/workflows/test.yaml
+      - .github/workflows/ts.yaml
   pull_request:
     branches: [main]
     paths:
       - src/**
       - test/**
       - '*.json'
-      - .github/workflows/test.yaml
+      - .github/workflows/ts.yaml
 
 jobs:
   build:
@@ -50,7 +50,6 @@ jobs:
           LATEST_TAG: v1
         run: |
           set -eux
-          git branch "release/$LATEST_TAG"
           test -f dist/index.js
           git add .
           git status
@@ -58,4 +57,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m "Release $LATEST_TAG"
           git tag -f "$LATEST_TAG"
-          git push origin -f "$LATEST_TAG" "release/$LATEST_TAG"
+          git push origin -f "$LATEST_TAG"
