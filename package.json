@@ -12,8 +12,7 @@
     "package": "ncc build --source-map --license licenses.txt",
     "test": "jest",
     "graphql-codegen": "graphql-codegen --config graphql-codegen.yaml",
-    "generate": "yarn graphql-codegen && yarn format && yarn build && yarn package",
-    "all": "yarn build && yarn format && yarn lint && yarn package && yarn test"
+    "check": "yarn graphql-codegen && yarn format && yarn lint && yarn test"
   },
   "dependencies": {
     "@actions/core": "1.2.7",
