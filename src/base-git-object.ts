@@ -1,6 +1,8 @@
 import { GitHub } from '@actions/github/lib/utils'
 import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql'
 
+type Octokit = InstanceType<typeof GitHub>
+
 const query = /* GraphQL */ `
   query baseGitObject($owner: String!, $repo: String!, $ref: String!) {
     repository(owner: $owner, name: $repo) {
@@ -22,7 +24,7 @@ const query = /* GraphQL */ `
 `
 
 export const queryBaseGitObject = async (
-  octokit: InstanceType<typeof GitHub>,
+  octokit: Octokit,
   v: BaseGitObjectQueryVariables
 ): Promise<BaseGitObjectQuery> => {
   return await octokit.graphql<BaseGitObjectQuery>(query, v)
