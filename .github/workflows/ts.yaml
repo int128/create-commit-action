@@ -36,16 +36,50 @@ jobs:
       - run: yarn build
       - run: yarn package
 
-      # TODO: push to an ephemeral branch
-      - name: e2e-test
-        if: github.event_name == 'pull_request'
+      # e2e-test
+      - name: e2e / prepare a fixture
+        run: |
+          mkdir e2e-test-fixture-directory
+          date > e2e-test-fixture-directory/date
+          echo '${{ github.ref }}' > e2e-test-fixture-directory/ref
+      - name: e2e / create a new branch from default branch
         uses: ./
         with:
           repository: ${{ github.repository }}
-          ref: ${{ github.head_ref }}
-          path: LICENSE
-          message: e2e-test
+          ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
+          path: e2e-test-fixture-directory
+          message: |
+            Create a new branch from default branch
 
+            ${{ github.sha }}
+            ${{ github.event.pull_request.html_url }}
+
+      - name: e2e / update the fixture
+        run: date >> e2e-test-fixture-directory/date
+      - name: e2e / update the branch
+        uses: ./
+        with:
+          repository: ${{ github.repository }}
+          ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
+          path: e2e-test-fixture-directory
+          message: |
+            Update the branch
+
+            ${{ github.sha }}
+            ${{ github.event.pull_request.html_url }}
+      - name: e2e / do nothing if no change
+        uses: ./
+        with:
+          repository: ${{ github.repository }}
+          ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
+          path: e2e-test-fixture-directory
+          message: Do nothing if no change
+
+      - name: e2e / clean up the fixture
+        run: git push origin --delete e2e-test-fixture-branch/${{ github.ref }}
+        if: always()
+
+      # release
       - name: release
         if: github.event_name == 'push'
         env:
