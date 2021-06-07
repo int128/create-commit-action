@@ -1,7 +1,9 @@
 import * as core from '@actions/core'
 import { GitHub } from '@actions/github/lib/utils'
+import { RequestError } from '@octokit/request-error'
 import { queryBaseGitObject } from './base-git-object'
 import { BaseGitObjectQuery } from './generated/graphql'
+import { retry } from './retry'
 
 type Octokit = InstanceType<typeof GitHub>
 
@@ -19,6 +21,18 @@ type TreeEntry = {
   mode: '100644' | '100755'
   type: 'blob'
 }
+
+export const pushWithRetry = async (octokit: Octokit, r: PushRequest): Promise<string> =>
+  await retry(
+    {
+      // retry on fast-forward failure
+      condition: (error: RequestError): boolean => error.status === 422,
+      maxAttempts: 3,
+      maxDelayMillisecond: 5000,
+      minDelayMillisecond: 2000,
+    },
+    async () => await push(octokit, r)
+  )
 
 export const push = async (octokit: Octokit, r: PushRequest): Promise<string> => {
   const baseGitObject = await queryBaseGitObject(octokit, {
