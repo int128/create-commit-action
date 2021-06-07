@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 import { promises as fs } from 'fs'
-import { push } from './git'
+import { pushWithRetry } from './git'
 import { globTreeFiles } from './glob'
 
 interface Inputs {
@@ -36,7 +36,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
     })
   )
 
-  await push(octokit, {
+  await pushWithRetry(octokit, {
     owner,
     repo,
     ref: inputs.ref,
