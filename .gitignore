@@ -104,3 +104,4 @@ typings/
 
 # generated files
 lib/
+e2e-test-fixture-directory/

@@ -32,6 +32,7 @@ jobs:
       - run: yarn
       - run: yarn lint
       - run: yarn format-check
+      - run: yarn graphql-codegen
       - run: yarn test
       - run: yarn build
       - run: yarn package
@@ -78,6 +79,9 @@ jobs:
       - name: e2e / clean up the fixture
         run: git push origin --delete e2e-test-fixture-branch/${{ github.ref }}
         if: always()
+
+      # all tests are passed at this point
+      - uses: int128/update-generated-files-action@main
 
       # release
       - name: release
