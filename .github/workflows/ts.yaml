@@ -7,6 +7,7 @@ on:
       - src/**
       - test/**
       - '*.json'
+      - action.yaml
       - .github/workflows/ts.yaml
   pull_request:
     branches: [main]
@@ -14,6 +15,7 @@ on:
       - src/**
       - test/**
       - '*.json'
+      - action.yaml
       - .github/workflows/ts.yaml
 
 jobs:
@@ -45,7 +47,6 @@ jobs:
       - name: e2e / create a new branch from default branch
         uses: ./
         with:
-          repository: ${{ github.repository }}
           ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
           path: e2e-test-fixture-directory
           message: |
@@ -59,7 +60,6 @@ jobs:
       - name: e2e / update the branch
         uses: ./
         with:
-          repository: ${{ github.repository }}
           ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
           path: e2e-test-fixture-directory
           message: |
@@ -70,7 +70,6 @@ jobs:
       - name: e2e / do nothing if no change
         uses: ./
         with:
-          repository: ${{ github.repository }}
           ref: refs/heads/e2e-test-fixture-branch/${{ github.ref }}
           path: e2e-test-fixture-directory
           message: Do nothing if no change
