@@ -4,6 +4,7 @@ inputs:
   repository:
     description: repository name to push (i.e. REPO/NAME)
     required: true
+    default: ${{ github.repository }}
   ref:
     description: ref name to update (e.g. refs/heads/main)
     required: true
