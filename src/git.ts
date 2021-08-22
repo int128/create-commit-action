@@ -55,11 +55,13 @@ export const push = async (octokit: Octokit, r: PushRequest): Promise<string> =>
 
 const createRef = async (octokit: Octokit, r: PushRequest, b: BaseGitObjectQuery): Promise<string> => {
   if (b.repository?.defaultBranchRef?.target?.__typename !== 'Commit') {
-    throw new Error(`unexpected response: ${b.repository?.defaultBranchRef?.target?.__typename} !== Commit`)
+    throw new Error(
+      `unexpected response: ${b.repository?.defaultBranchRef?.target?.__typename ?? 'undefined'} !== Commit`
+    )
   }
   const parent = {
-    commit: b.repository.defaultBranchRef.target.oid,
-    tree: b.repository.defaultBranchRef.target.tree.oid,
+    commit: b.repository.defaultBranchRef.target.oid as string,
+    tree: b.repository.defaultBranchRef.target.tree.oid as string,
   }
   const commit = await createCommit(octokit, r, parent)
   const { data: ref } = await octokit.rest.git.createRef({
@@ -74,11 +76,11 @@ const createRef = async (octokit: Octokit, r: PushRequest, b: BaseGitObjectQuery
 
 const updateRef = async (octokit: Octokit, r: PushRequest, b: BaseGitObjectQuery): Promise<string> => {
   if (b.repository?.ref?.target?.__typename !== 'Commit') {
-    throw new Error(`unexpected response: ${b?.repository?.ref?.target?.__typename} !== Commit`)
+    throw new Error(`unexpected response: ${b?.repository?.ref?.target?.__typename ?? 'undefined'} !== Commit`)
   }
   const parent = {
-    commit: b.repository.ref.target.oid,
-    tree: b.repository.ref.target.tree.oid,
+    commit: b.repository.ref.target.oid as string,
+    tree: b.repository.ref.target.tree.oid as string,
   }
   const commit = await createCommit(octokit, r, parent)
   const { data: ref } = await octokit.rest.git.updateRef({
@@ -129,7 +131,7 @@ const createCommit = async (octokit: Octokit, r: PushRequest, parent: Parent): P
   }
 
   for (const f of commitDetail.files) {
-    core.info(`commit: ${f.status} ${f.filename} (+${f.additions} -${f.deletions})`)
+    core.info(`commit: ${f.status ?? '?'} ${f.filename ?? '?'} (+${f.additions ?? '?'} -${f.deletions ?? '?'})`)
   }
   return commit.sha
 }

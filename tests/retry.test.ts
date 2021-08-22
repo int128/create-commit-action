@@ -26,7 +26,7 @@ describe('retry', () => {
     const f = jest.fn()
     f.mockRejectedValueOnce(someRequest(400))
     const r = retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 2 }, f)
-    expect(r).rejects.toThrowError()
+    await expect(r).rejects.toThrowError()
     expect(f).toBeCalledTimes(1)
   })
 })
