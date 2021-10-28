@@ -1,11 +1,6 @@
 {
   "extends": [
-    "config:base"
-  ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
-    }
+    "config:base",
+    "github>int128/typescript-action-renovate-config"
   ]
 }
