@@ -19,7 +19,7 @@ on:
       - .github/workflows/ts.yaml
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -73,3 +73,18 @@ jobs:
       - name: e2e / clean up the fixture
         run: git push origin --delete e2e-test-fixture-branch/${{ github.ref }}
         if: always()
+
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
+      - run: yarn
+      - run: yarn format
+      - run: yarn graphql-codegen
+      - uses: int128/update-generated-files-action@v2
