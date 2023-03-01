@@ -11,7 +11,7 @@ describe('retry', () => {
     const f = jest.fn()
     f.mockResolvedValue('something')
     await retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 1 }, f)
-    expect(f).toBeCalledTimes(1)
+    expect(f).toHaveBeenCalledTimes(1)
   })
 
   test('retry recovers first error', async () => {
@@ -19,14 +19,14 @@ describe('retry', () => {
     f.mockRejectedValueOnce(someRequest(422))
     f.mockResolvedValueOnce('something')
     await retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 2 }, f)
-    expect(f).toBeCalledTimes(2)
+    expect(f).toHaveBeenCalledTimes(2)
   })
 
   test('retry does not handle if condition is not satisfied', async () => {
     const f = jest.fn()
     f.mockRejectedValueOnce(someRequest(400))
     const r = retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 2 }, f)
-    await expect(r).rejects.toThrowError()
-    expect(f).toBeCalledTimes(1)
+    await expect(r).rejects.toThrow()
+    expect(f).toHaveBeenCalledTimes(1)
   })
 })
