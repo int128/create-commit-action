@@ -2,7 +2,8 @@ name: ts
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - src/**
       - test/**
@@ -10,7 +11,6 @@ on:
       - action.yaml
       - .github/workflows/ts.yaml
   pull_request:
-    branches: [main]
     paths:
       - src/**
       - test/**
@@ -21,6 +21,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -76,15 +77,15 @@ jobs:
 
   generate:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: yarn
       - run: yarn
+      - run: yarn lint --fix
       - run: yarn format
       - run: yarn graphql-codegen
       - uses: int128/update-generated-files-action@v2
