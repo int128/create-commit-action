@@ -33,7 +33,7 @@ export const run = async (inputs: Inputs): Promise<void> => {
         type: f.type,
         mode: f.mode,
       }
-    })
+    }),
   )
 
   await pushWithRetry(octokit, {
