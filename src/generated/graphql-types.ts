@@ -13852,6 +13852,7 @@ export type OrganizationRepositoriesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  isArchived?: InputMaybe<Scalars['Boolean']>;
   isFork?: InputMaybe<Scalars['Boolean']>;
   isLocked?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
@@ -21425,6 +21426,7 @@ export type RepositoryOwnerRepositoriesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  isArchived?: InputMaybe<Scalars['Boolean']>;
   isFork?: InputMaybe<Scalars['Boolean']>;
   isLocked?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
@@ -27873,6 +27875,7 @@ export type UserRepositoriesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
+  isArchived?: InputMaybe<Scalars['Boolean']>;
   isFork?: InputMaybe<Scalars['Boolean']>;
   isLocked?: InputMaybe<Scalars['Boolean']>;
   last?: InputMaybe<Scalars['Int']>;
