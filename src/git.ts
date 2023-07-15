@@ -31,7 +31,7 @@ export const pushWithRetry = async (octokit: Octokit, r: PushRequest): Promise<s
       maxDelayMillisecond: 5000,
       minDelayMillisecond: 2000,
     },
-    async () => await push(octokit, r)
+    async () => await push(octokit, r),
   )
 
 export const push = async (octokit: Octokit, r: PushRequest): Promise<string> => {
@@ -56,7 +56,7 @@ export const push = async (octokit: Octokit, r: PushRequest): Promise<string> =>
 const createRef = async (octokit: Octokit, r: PushRequest, b: BaseGitObjectQuery): Promise<string> => {
   if (b.repository?.defaultBranchRef?.target?.__typename !== 'Commit') {
     throw new Error(
-      `unexpected response: ${b.repository?.defaultBranchRef?.target?.__typename ?? 'undefined'} !== Commit`
+      `unexpected response: ${b.repository?.defaultBranchRef?.target?.__typename ?? 'undefined'} !== Commit`,
     )
   }
   const parent = {
