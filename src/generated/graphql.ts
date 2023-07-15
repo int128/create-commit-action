@@ -1,9 +1,9 @@
 import * as Types from './graphql-types';
 
 export type BaseGitObjectQueryVariables = Types.Exact<{
-  owner: Types.Scalars['String'];
-  repo: Types.Scalars['String'];
-  ref: Types.Scalars['String'];
+  owner: Types.Scalars['String']['input'];
+  repo: Types.Scalars['String']['input'];
+  ref: Types.Scalars['String']['input'];
 }>;
 
 
