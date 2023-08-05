@@ -7784,6 +7784,8 @@ export type GitHubMetadata = {
   gitHubServicesSha: Scalars['GitObjectID']['output'];
   /** IP addresses that users connect to for git operations */
   gitIpAddresses?: Maybe<Array<Scalars['String']['output']>>;
+  /** IP addresses that GitHub Enterprise Importer uses for outbound connections */
+  githubEnterpriseImporterIpAddresses?: Maybe<Array<Scalars['String']['output']>>;
   /** IP addresses that service hooks are sent from */
   hookIpAddresses?: Maybe<Array<Scalars['String']['output']>>;
   /** IP addresses that the importer connects from */
@@ -24252,7 +24254,7 @@ export type StartRepositoryMigrationInput = {
   accessToken?: InputMaybe<Scalars['String']['input']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** Whether to continue the migration on error. Defaults to `false`. */
+  /** Whether to continue the migration on error. Defaults to `false`. We strongly recommend setting this to `true` for the smoothest migration experience. */
   continueOnError?: InputMaybe<Scalars['Boolean']['input']>;
   /** The signed URL to access the user-uploaded git archive. */
   gitArchiveUrl?: InputMaybe<Scalars['String']['input']>;
