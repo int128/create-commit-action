@@ -1,6 +1,6 @@
 import { GitHub } from '@actions/github/lib/utils'
-import { GraphQlQueryResponse } from '@octokit/graphql/dist-types/types'
 import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql'
+import { GraphqlResponseError } from '@octokit/graphql'
 
 type Octokit = InstanceType<typeof GitHub>
 
@@ -38,8 +38,8 @@ export const queryBaseGitObject = async (o: Octokit, v: BaseGitObjectQueryVariab
     return await o.graphql<BaseGitObjectQuery>(query, v)
   } catch (error) {
     // handle the partial response when ref does not exist
-    if (typeof error === 'object' && error !== null && 'data' in error) {
-      const e = error as GraphQlQueryResponse<BaseGitObjectQuery>
+    if (error instanceof GraphqlResponseError) {
+      const e = error as GraphqlResponseError<BaseGitObjectQuery>
       return e.data
     } else {
       throw error
