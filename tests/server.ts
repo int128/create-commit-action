@@ -7,7 +7,7 @@ export class MockServer {
   private readonly server: http.Server
 
   constructor() {
-    this.handler = jest.fn()
+    this.handler = jest.fn<number, [string | undefined]>()
     this.server = http.createServer((req, res) => {
       res.statusCode = this.handler(req.url)
       res.end()
