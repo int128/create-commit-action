@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import { GitHub } from '@actions/github/lib/utils'
-import { RequestError } from '@octokit/request-error'
 import { queryBaseGitObject } from './base-git-object'
 import { BaseGitObjectQuery } from './generated/graphql'
 import { retry } from './retry'
@@ -26,7 +25,7 @@ export const pushWithRetry = async (octokit: Octokit, r: PushRequest): Promise<s
   await retry(
     {
       // retry on fast-forward failure
-      condition: (error: RequestError): boolean => error.status === 422,
+      condition: (error): boolean => error.status === 422,
       maxAttempts: 3,
       maxDelayMillisecond: 5000,
       minDelayMillisecond: 2000,

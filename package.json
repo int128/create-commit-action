@@ -15,7 +15,6 @@
     "@actions/github": "6.0.0",
     "@actions/glob": "0.4.0",
     "@octokit/graphql": "7.0.2",
-    "@octokit/request-error": "5.0.1",
     "graphql": "16.8.1"
   },
   "devDependencies": {

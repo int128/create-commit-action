@@ -17,9 +17,6 @@ dependencies:
   '@octokit/graphql':
     specifier: 7.0.2
     version: 7.0.2
-  '@octokit/request-error':
-    specifier: 5.0.1
-    version: 5.0.1
   graphql:
     specifier: 16.8.1
     version: 16.8.1
