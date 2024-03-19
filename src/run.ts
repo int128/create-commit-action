@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import * as github from '@actions/github'
+import { Octokit } from '@octokit/action'
 import { promises as fs } from 'fs'
 import { pushWithRetry } from './git'
 import { globTreeFiles } from './glob'
@@ -15,7 +15,7 @@ interface Inputs {
 
 export const run = async (inputs: Inputs): Promise<void> => {
   const [owner, repo] = inputs.repository.split('/')
-  const octokit = github.getOctokit(inputs.token)
+  const octokit = new Octokit({ auth: inputs.token, authStrategy: null })
 
   const treeFiles = await globTreeFiles(inputs.baseDirectory, inputs.path)
   const treeEntries = await Promise.all(

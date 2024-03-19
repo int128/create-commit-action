@@ -1,10 +1,8 @@
 import * as core from '@actions/core'
-import { GitHub } from '@actions/github/lib/utils'
+import { Octokit } from '@octokit/action'
 import { queryBaseGitObject } from './base-git-object'
 import { BaseGitObjectQuery } from './generated/graphql'
 import { retry } from './retry'
-
-type Octokit = InstanceType<typeof GitHub>
 
 type PushRequest = {
   owner: string
