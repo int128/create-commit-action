@@ -1,8 +1,6 @@
-import { GitHub } from '@actions/github/lib/utils'
 import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql'
 import { GraphqlResponseError } from '@octokit/graphql'
-
-type Octokit = InstanceType<typeof GitHub>
+import { Octokit } from '@octokit/action'
 
 const query = /* GraphQL */ `
   query baseGitObject($owner: String!, $repo: String!, $ref: String!) {
