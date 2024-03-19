@@ -12,7 +12,7 @@ dependencies:
     specifier: 0.4.0
     version: 0.4.0
   '@octokit/action':
-    specifier: ^6.0.7
+    specifier: 6.0.7
     version: 6.0.7
   '@octokit/graphql':
     specifier: 7.0.2
