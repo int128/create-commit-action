@@ -1,5 +1,5 @@
 import { RequestError, retry } from '../src/retry'
-import { getOctokit } from '@actions/github'
+import { Octokit } from '@octokit/action'
 import { MockServer } from './server'
 
 describe('retry', () => {
@@ -11,7 +11,7 @@ describe('retry', () => {
 
   test('no error then no retry', async () => {
     mockServer.handler.mockReturnValueOnce(200)
-    const octokit = getOctokit('GITHUB_TOKEN', { baseUrl: mockServer.baseUrl() })
+    const octokit = new Octokit({ authStrategy: null, baseUrl: mockServer.baseUrl() })
     const f = async () => await octokit.request('GET /')
     await retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 1 }, f)
     expect(mockServer.handler).toHaveBeenCalledTimes(1)
@@ -20,7 +20,7 @@ describe('retry', () => {
   test('retry recovers first error', async () => {
     mockServer.handler.mockReturnValueOnce(422)
     mockServer.handler.mockReturnValueOnce(200)
-    const octokit = getOctokit('GITHUB_TOKEN', { baseUrl: mockServer.baseUrl() })
+    const octokit = new Octokit({ authStrategy: null, baseUrl: mockServer.baseUrl() })
     const f = async () => await octokit.request('GET /')
     await retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 2 }, f)
     expect(mockServer.handler).toHaveBeenCalledTimes(2)
@@ -28,7 +28,7 @@ describe('retry', () => {
 
   test('retry does not handle if condition is not satisfied', async () => {
     mockServer.handler.mockReturnValueOnce(400)
-    const octokit = getOctokit('GITHUB_TOKEN', { baseUrl: mockServer.baseUrl() })
+    const octokit = new Octokit({ authStrategy: null, baseUrl: mockServer.baseUrl() })
     const f = async () => await octokit.request('GET /')
     const r = retry({ condition, maxDelayMillisecond: 0, minDelayMillisecond: 0, maxAttempts: 2 }, f)
     await expect(r).rejects.toThrow()

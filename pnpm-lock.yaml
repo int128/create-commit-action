@@ -8,12 +8,12 @@ dependencies:
   '@actions/core':
     specifier: 1.10.1
     version: 1.10.1
-  '@actions/github':
-    specifier: 6.0.0
-    version: 6.0.0
   '@actions/glob':
     specifier: 0.4.0
     version: 0.4.0
+  '@octokit/action':
+    specifier: ^6.0.7
+    version: 6.0.7
   '@octokit/graphql':
     specifier: 7.0.2
     version: 7.0.2
@@ -89,15 +89,6 @@ packages:
     dependencies:
       '@actions/http-client': 2.2.0
       uuid: 8.3.2
-    dev: false
-
-  /@actions/github@6.0.0:
-    resolution: {integrity: sha512-alScpSVnYmjNEXboZjarjukQEzgCRmjMv6Xj47fsdnqGS73bjJNDpiiXmp8jr0UZLdUB6d9jW63IcmddUP+l0g==}
-    dependencies:
-      '@actions/http-client': 2.2.0
-      '@octokit/core': 5.1.0
-      '@octokit/plugin-paginate-rest': 9.2.1(@octokit/core@5.1.0)
-      '@octokit/plugin-rest-endpoint-methods': 10.4.1(@octokit/core@5.1.0)
     dev: false
 
   /@actions/glob@0.4.0:
@@ -1885,6 +1876,26 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
     dev: true
+
+  /@octokit/action@6.0.7:
+    resolution: {integrity: sha512-0Q1L96F8JsNb+M2NzN7r4artGyX02Pa9tzg+JaxXncvdHEXVIJFnkA8CstC52EB4DAZ0b8wpqDOG05v/DcyS3g==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/auth-action': 4.0.1
+      '@octokit/core': 5.1.0
+      '@octokit/plugin-paginate-rest': 9.2.1(@octokit/core@5.1.0)
+      '@octokit/plugin-rest-endpoint-methods': 10.4.1(@octokit/core@5.1.0)
+      '@octokit/types': 12.6.0
+      undici: 6.9.0
+    dev: false
+
+  /@octokit/auth-action@4.0.1:
+    resolution: {integrity: sha512-mJLOcFFafIivLZ7BEkGDCTFoHPJv7BeL5Zwy7j5qMDU0b/DKshhi6GCU9tw3vmKhOxTNquYfvwqsEfPpemaaxg==}
+    engines: {node: '>= 18'}
+    dependencies:
+      '@octokit/auth-token': 4.0.0
+      '@octokit/types': 12.6.0
+    dev: false
 
   /@octokit/auth-token@4.0.0:
     resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
@@ -5474,6 +5485,11 @@ packages:
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.1.1
+    dev: false
+
+  /undici@6.9.0:
+    resolution: {integrity: sha512-XPWfXzJedevUziHwun70EKNvGnxv4CnfraFZ4f/JV01+fcvMYzHE26r/j8AY/9c/70nkN4B1zX7E2Oyuqwz4+Q==}
+    engines: {node: '>=18.0'}
     dev: false
 
   /universal-user-agent@6.0.1:
