@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import { Octokit } from '@octokit/action'
 import { promises as fs } from 'fs'
-import { pushWithRetry } from './git'
-import { globTreeFiles } from './glob'
+import { pushWithRetry } from './git.js'
+import { globTreeFiles } from './glob.js'
 
 type Inputs = {
   repository: string
