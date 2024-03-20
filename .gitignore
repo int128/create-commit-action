@@ -102,5 +102,5 @@ typings/
 # TernJS port file
 .tern-port
 
-# generated files
-lib/
+# Only release tag contains dist directory
+/dist
