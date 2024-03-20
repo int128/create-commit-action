@@ -1,8 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
-import { schema } from '@octokit/graphql-schema'
 
 const config: CodegenConfig = {
-  schema: schema.idl,
+  schema: `node_modules/@octokit/graphql-schema/schema.graphql`,
   documents: ['src/**/*.ts'],
   generates: {
     'src/generated/graphql-types.ts': {
@@ -12,7 +11,7 @@ const config: CodegenConfig = {
       preset: 'import-types',
       plugins: ['typescript-operations'],
       presetConfig: {
-        typesPath: './graphql-types',
+        typesPath: './graphql-types.js',
       },
     },
   },

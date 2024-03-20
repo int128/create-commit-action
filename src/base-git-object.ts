@@ -1,4 +1,4 @@
-import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql'
+import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql.js'
 import { GraphqlResponseError } from '@octokit/graphql'
 import { Octokit } from '@octokit/action'
 

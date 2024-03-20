@@ -1,6 +1,6 @@
-import { RequestError, retry } from '../src/retry'
+import { RequestError, retry } from '../src/retry.js'
 import { Octokit } from '@octokit/action'
-import { MockServer } from './server'
+import { MockServer } from './server.js'
 
 describe('retry', () => {
   const mockServer = new MockServer()
