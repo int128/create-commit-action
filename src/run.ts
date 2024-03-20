@@ -4,7 +4,7 @@ import { promises as fs } from 'fs'
 import { pushWithRetry } from './git'
 import { globTreeFiles } from './glob'
 
-interface Inputs {
+type Inputs = {
   repository: string
   ref: string
   path: string

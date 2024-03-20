@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import { run } from './run'
 
-async function main(): Promise<void> {
+const main = async (): Promise<void> => {
   await run({
     repository: core.getInput('repository', { required: true }),
     ref: core.getInput('ref', { required: true }),
