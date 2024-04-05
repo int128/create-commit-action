@@ -35,8 +35,8 @@ devDependencies:
     specifier: 4.2.0
     version: 4.2.0(graphql@16.8.1)
   '@octokit/graphql-schema':
-    specifier: 15.4.0
-    version: 15.4.0
+    specifier: 15.4.1
+    version: 15.4.1
   '@tsconfig/node20':
     specifier: 20.1.4
     version: 20.1.4
@@ -1928,8 +1928,8 @@ packages:
       universal-user-agent: 6.0.1
     dev: false
 
-  /@octokit/graphql-schema@15.4.0:
-    resolution: {integrity: sha512-lSjYx0qB2tHMqShJVYbh99Msz+HtnJVC16HUwDLh8EnSxdUXD7yFi5RQGWrMRC4ae0s5s6+pbzJ7rUaF8AQCBg==}
+  /@octokit/graphql-schema@15.4.1:
+    resolution: {integrity: sha512-XJwKHpl1yPT0rGeVKQA7/lxP8rTgAflGaZrfZiRTaO4pkruKFSLhFGiRgC/c0vVp6vkbMNCYjus5Ve1x4t71eA==}
     dependencies:
       graphql: 16.8.1
       graphql-tag: 2.12.6(graphql@16.8.1)
