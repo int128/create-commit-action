@@ -18,8 +18,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0
       '@octokit/graphql':
-        specifier: 8.1.0
-        version: 8.1.0
+        specifier: 8.1.1
+        version: 8.1.1
       graphql:
         specifier: 16.8.1
         version: 16.8.1
@@ -37,8 +37,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0(graphql@16.8.1)
       '@octokit/graphql-schema':
-        specifier: 15.4.2
-        version: 15.4.2
+        specifier: 15.12.0
+        version: 15.12.0
       '@tsconfig/node20':
         specifier: 20.1.4
         version: 20.1.4
@@ -866,15 +866,15 @@ packages:
     resolution: {integrity: sha512-DWPLtr1Kz3tv8L0UvXTDP1fNwM0S+z6EJpRcvH66orY6Eld4XBMCSYsaWp4xIm61jTWxK68BrR7ibO+vSDnZqw==}
     engines: {node: '>= 18'}
 
-  '@octokit/graphql-schema@15.4.2':
-    resolution: {integrity: sha512-PIfFAnTgRN5MW9ndnYIL3R07LZXQd8JlP1e2s4Ku7T+pvVXgl8JaAuongNdImKYOhrqEukgXNusKTZc2KEXUmg==}
+  '@octokit/graphql-schema@15.12.0':
+    resolution: {integrity: sha512-YiONgXzmQi4MVQBdJsCF7fgSAhnZySstDchw9bxkBYJRwNVwpwz7fjmOQVJbvIpqKtJ0vpZMgodZj3A3L9YwDw==}
 
   '@octokit/graphql@7.0.2':
     resolution: {integrity: sha512-OJ2iGMtj5Tg3s6RaXH22cJcxXRi7Y3EBqbHTBRq+PQAqfaS8f/236fUrWhfSn8P4jovyzqucxme7/vWSSZBX2Q==}
     engines: {node: '>= 18'}
 
-  '@octokit/graphql@8.1.0':
-    resolution: {integrity: sha512-XDvj6GcUnQYgbCLXElt3vZDzNIPGvGiwxQO2XzsvfVUjebGh0E5eCD/1My9zUGSNKaGVZitVuO8LMziGmoFryg==}
+  '@octokit/graphql@8.1.1':
+    resolution: {integrity: sha512-ukiRmuHTi6ebQx/HFRCXKbDlOh/7xEV6QUXaE7MJEKGNAncGI/STSbOkl12qVXZrfZdpXctx5O9X1AIaebiDBg==}
     engines: {node: '>= 18'}
 
   '@octokit/openapi-types@20.0.0':
@@ -4125,7 +4125,7 @@ snapshots:
       '@octokit/types': 12.6.0
       universal-user-agent: 6.0.1
 
-  '@octokit/graphql-schema@15.4.2':
+  '@octokit/graphql-schema@15.12.0':
     dependencies:
       graphql: 16.8.1
       graphql-tag: 2.12.6(graphql@16.8.1)
@@ -4136,7 +4136,7 @@ snapshots:
       '@octokit/types': 12.6.0
       universal-user-agent: 6.0.1
 
-  '@octokit/graphql@8.1.0':
+  '@octokit/graphql@8.1.1':
     dependencies:
       '@octokit/request': 9.0.1
       '@octokit/types': 13.0.0
