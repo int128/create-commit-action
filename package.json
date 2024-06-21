@@ -13,7 +13,7 @@
     "@actions/glob": "0.4.0",
     "@octokit/action": "6.1.0",
     "@octokit/graphql": "8.1.1",
-    "graphql": "16.8.2"
+    "graphql": "16.9.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
