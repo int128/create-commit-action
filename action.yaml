@@ -11,6 +11,9 @@ inputs:
   path:
     description: glob paths to commit
     required: true
+  remove:
+    description: list of paths to remove
+    required: false
   base-directory:
     description: base directory to compute a path of file to commit
     required: true

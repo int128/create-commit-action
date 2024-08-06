@@ -8,6 +8,7 @@ type Inputs = {
   repository: string
   ref: string
   path: string
+  remove: string[]
   baseDirectory: string
   message: string
   token: string
@@ -35,6 +36,18 @@ export const run = async (inputs: Inputs): Promise<void> => {
       }
     }),
   )
+
+  if (inputs.remove) {
+    for (const f of inputs.remove) {
+      core.info(`removing ${f}`)
+      treeEntries.push({
+        path: f,
+        mode: "100644",
+        type: "blob",
+        sha: '',
+      });
+    }
+  }
 
   await pushWithRetry(octokit, {
     owner,
