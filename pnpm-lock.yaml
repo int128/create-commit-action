@@ -39,9 +39,9 @@ importers:
       '@octokit/graphql-schema':
         specifier: 15.25.0
         version: 15.25.0
-      '@tsconfig/node20':
-        specifier: 20.1.4
-        version: 20.1.4
+      '@tsconfig/recommended':
+        specifier: ^1.0.8
+        version: 1.0.8
       '@types/node':
         specifier: 20.17.16
         version: 20.17.16
@@ -1067,8 +1067,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@tsconfig/node20@20.1.4':
-    resolution: {integrity: sha512-sqgsT69YFeLWf5NtJ4Xq/xAF8p4ZQHlmGW74Nu2tD4+g5fAsposc4ZfaaPixVu4y01BEiDCWLRDCvDM5JOsRxg==}
+  '@tsconfig/recommended@1.0.8':
+    resolution: {integrity: sha512-TotjFaaXveVUdsrXCdalyF6E5RyG6+7hHHQVZonQtdlk1rJZ1myDIvPUUKPhoYv+JAzThb2lQJh9+9ZfF46hsA==}
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
@@ -3898,7 +3898,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.32.1':
     optional: true
 
-  '@tsconfig/node20@20.1.4': {}
+  '@tsconfig/recommended@1.0.8': {}
 
   '@types/estree@1.0.6': {}
 
