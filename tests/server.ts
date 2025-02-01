@@ -1,13 +1,14 @@
 import assert from 'assert'
 import * as http from 'http'
+import { vi } from 'vitest'
 
 export class MockServer {
-  readonly handler: jest.Mock<number, [string | undefined]>
+  readonly handler
 
   private readonly server: http.Server
 
   constructor() {
-    this.handler = jest.fn<number, [string | undefined]>()
+    this.handler = vi.fn()
     this.server = http.createServer((req, res) => {
       res.statusCode = this.handler(req.url)
       res.end()
