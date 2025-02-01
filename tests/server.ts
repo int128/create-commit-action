@@ -8,7 +8,7 @@ export class MockServer {
   private readonly server: http.Server
 
   constructor() {
-    this.handler = vi.fn()
+    this.handler = vi.fn<(url?: string) => number>()
     this.server = http.createServer((req, res) => {
       res.statusCode = this.handler(req.url)
       res.end()
