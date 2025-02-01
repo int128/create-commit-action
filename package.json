@@ -12,7 +12,7 @@
     "@actions/core": "1.11.1",
     "@actions/glob": "0.5.0",
     "@octokit/action": "6.1.0",
-    "@octokit/graphql": "8.1.2",
+    "@octokit/graphql": "8.2.0",
     "graphql": "16.10.0"
   },
   "devDependencies": {
