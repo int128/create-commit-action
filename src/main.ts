@@ -6,6 +6,7 @@ const main = async (): Promise<void> => {
     repository: core.getInput('repository', { required: true }),
     ref: core.getInput('ref', { required: true }),
     path: core.getInput('path', { required: true }),
+    remove: core.getMultilineInput('remove', { required: false }),
     baseDirectory: core.getInput('base-directory', { required: true }),
     message: core.getInput('message', { required: true }),
     token: core.getInput('token', { required: true }),

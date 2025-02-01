@@ -16,6 +16,7 @@ jobs:
           repository: ${{ github.repository }}
           ref: refs/heads/branch-name
           path: glob-pattern
+          remove: files to remove from Git
           message: your-commit-message
 ```
 
