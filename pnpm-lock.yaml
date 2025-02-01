@@ -40,7 +40,7 @@ importers:
         specifier: 15.25.0
         version: 15.25.0
       '@tsconfig/recommended':
-        specifier: ^1.0.8
+        specifier: 1.0.8
         version: 1.0.8
       '@types/node':
         specifier: 20.17.16
