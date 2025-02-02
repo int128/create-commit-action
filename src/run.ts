@@ -10,12 +10,10 @@ type Inputs = {
   path: string
   baseDirectory: string
   message: string
-  token: string
 }
 
-export const run = async (inputs: Inputs): Promise<void> => {
+export const run = async (inputs: Inputs, octokit: Octokit): Promise<void> => {
   const [owner, repo] = inputs.repository.split('/')
-  const octokit = new Octokit({ auth: inputs.token, authStrategy: null })
 
   const treeFiles = await globTreeFiles(inputs.baseDirectory, inputs.path)
   const treeEntries = await Promise.all(
