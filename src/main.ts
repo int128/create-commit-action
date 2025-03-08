@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import { Octokit } from '@octokit/action'
+import { retry } from '@octokit/plugin-retry'
 import { run } from './run.js'
 
 const main = async (): Promise<void> => {
@@ -11,9 +12,11 @@ const main = async (): Promise<void> => {
       baseDirectory: core.getInput('base-directory', { required: true }),
       message: core.getInput('message', { required: true }),
     },
-    new Octokit(),
+    getOctokit(),
   )
 }
+
+const getOctokit = () => new (Octokit.plugin(retry))()
 
 main().catch((e: Error) => {
   core.setFailed(e)
