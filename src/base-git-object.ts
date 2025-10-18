@@ -1,6 +1,6 @@
-import { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql.js'
+import type { Octokit } from '@octokit/action'
 import { GraphqlResponseError } from '@octokit/graphql'
-import { Octokit } from '@octokit/action'
+import type { BaseGitObjectQuery, BaseGitObjectQueryVariables } from './generated/graphql.js'
 
 const query = /* GraphQL */ `
   query baseGitObject($owner: String!, $repo: String!, $ref: String!) {

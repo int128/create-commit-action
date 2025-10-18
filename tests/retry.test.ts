@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/action'
-import { MockServer } from './server.js'
-import { RequestError, retry } from '../src/retry.js'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
+import { type RequestError, retry } from '../src/retry.js'
+import { MockServer } from './server.js'
 
 describe('retry', () => {
   const mockServer = new MockServer()
