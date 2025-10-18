@@ -1,5 +1,5 @@
-import assert from 'assert'
-import * as http from 'http'
+import assert from 'node:assert'
+import * as http from 'node:http'
 import { vi } from 'vitest'
 
 export class MockServer {

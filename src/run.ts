@@ -1,6 +1,6 @@
+import { promises as fs } from 'node:fs'
 import * as core from '@actions/core'
-import { Octokit } from '@octokit/action'
-import { promises as fs } from 'fs'
+import type { Octokit } from '@octokit/action'
 import { pushWithRetry } from './git.js'
 import { globTreeFiles } from './glob.js'
 

@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
-import { Octokit } from '@octokit/action'
+import type { Octokit } from '@octokit/action'
 import { queryBaseGitObject } from './base-git-object.js'
-import { BaseGitObjectQuery } from './generated/graphql.js'
+import type { BaseGitObjectQuery } from './generated/graphql.js'
 import { retry } from './retry.js'
 
 type PushRequest = {
