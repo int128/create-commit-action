@@ -10,8 +10,8 @@
     "@actions/core": "1.11.1",
     "@actions/glob": "0.5.0",
     "@octokit/action": "8.0.2",
-    "@octokit/graphql": "9.0.2",
-    "@octokit/plugin-retry": "8.0.2",
+    "@octokit/graphql": "9.0.3",
+    "@octokit/plugin-retry": "8.0.3",
     "graphql": "16.11.0"
   },
   "devDependencies": {
