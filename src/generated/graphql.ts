@@ -7,4 +7,14 @@ export type BaseGitObjectQueryVariables = Types.Exact<{
 }>;
 
 
-export type BaseGitObjectQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', ref?: { __typename?: 'Ref', target?: { __typename: 'Blob' } | { __typename: 'Commit', oid: any, tree: { __typename?: 'Tree', oid: any } } | { __typename: 'Tag' } | { __typename: 'Tree' } | null } | null, defaultBranchRef?: { __typename?: 'Ref', target?: { __typename: 'Blob' } | { __typename: 'Commit', oid: any, tree: { __typename?: 'Tree', oid: any } } | { __typename: 'Tag' } | { __typename: 'Tree' } | null } | null } | null };
+export type BaseGitObjectQuery = { __typename?: 'Query', repository?: { __typename?: 'Repository', ref?: { __typename?: 'Ref', target?:
+        | { __typename: 'Blob' }
+        | { __typename: 'Commit', oid: any, tree: { __typename?: 'Tree', oid: any } }
+        | { __typename: 'Tag' }
+        | { __typename: 'Tree' }
+       | null } | null, defaultBranchRef?: { __typename?: 'Ref', target?:
+        | { __typename: 'Blob' }
+        | { __typename: 'Commit', oid: any, tree: { __typename?: 'Tree', oid: any } }
+        | { __typename: 'Tag' }
+        | { __typename: 'Tree' }
+       | null } | null } | null };
