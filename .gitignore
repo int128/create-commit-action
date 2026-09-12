@@ -103,4 +103,4 @@ typings/
 .tern-port
 
 # Only release tag contains dist directory
-/dist
+
