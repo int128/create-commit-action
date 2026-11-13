@@ -13,7 +13,7 @@
     "@octokit/action": "8.0.4",
     "@octokit/graphql": "9.0.5",
     "@octokit/plugin-retry": "8.1.1",
-    "graphql": "17.0.2"
+    "graphql": "17.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
