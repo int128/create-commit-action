@@ -2,7 +2,6 @@
 
 This is an action to push files using GitHub API.
 
-
 ## Getting Started
 
 To create a commit to a branch or tag:
@@ -21,7 +20,6 @@ jobs:
 
 If a branch or tag does not exist, this action creates it from default branch.
 Otherwise, this action updates it by fast-forward.
-
 
 ## How it works
 
